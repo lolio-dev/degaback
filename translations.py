@@ -10,7 +10,7 @@ class TranslationCol(Enum):
 	en = 2
 
 
-def generate_translations(lang_col: int, lang_name: str):
+def generate_translations(lang_col: int):
 	raw_data = get_data('Traductions')[1:][0]
 	data = {}
 	translations = {}
@@ -28,6 +28,10 @@ def generate_translations(lang_col: int, lang_name: str):
 			current_dict = current_dict.setdefault(k, {})
 		current_dict[keys[-1]] = value
 
+	return translations
+
+
+def write_to_file(translations, lang_name):
 	directory = 'translations'
 	if not os.path.exists(directory):
 		os.makedirs(directory)
@@ -39,4 +43,4 @@ def generate_translations(lang_col: int, lang_name: str):
 
 	return filename
 
-generate_translations(2, 'en')
+generate_translations(2)
